@@ -3,15 +3,15 @@
 #include <chrono>
 
 using namespace std;
-unsigned long long q_multiplySix(unsigned long long n)
+uint64_t q_multiplySix(uint64_t n)
 {
   return (n << 2) + (n << 1);
 }
 
-vector<unsigned long long> calculateFactors(unsigned long long n)
+vector<uint64_t> calculateFactors(uint64_t n)
 {
   auto start = chrono::high_resolution_clock::now();
-  vector<unsigned long long> factors;
+  vector<uint64_t> factors;
 
   while ((n & 1) == 0) // n % 2 == 0
   {
@@ -23,17 +23,16 @@ vector<unsigned long long> calculateFactors(unsigned long long n)
     factors.push_back(3);
     n /= 3;
   }
-  unsigned long long sqrtN = q_multiplySix(sqrtl(n >> 5)); // 6 * sqrt(n / 32)
-  for (unsigned long long i = 1; i <= sqrtN; i++) // 6k +/- 1
+  uint64_t sqrtN = uint64_t(sqrtl(n >> 6)) << 3; // 8 * sqrt(n / 64)
+  for (uint64_t i = 1; i <= sqrtN; i++) // 6k +/- 1
   {
     if (n == 1) break;
-    unsigned long long factor = q_multiplySix(i) - 1; // 6k - 1
+    uint64_t factor = q_multiplySix(i) - 1; // 6k - 1
     while (n % factor == 0)
     {
       factors.push_back(factor);
       n /= factor;
     }
-    if (n == 1) break;
     factor += 2; // 6k + 1
     while (n % factor == 0)
     {
@@ -53,12 +52,12 @@ vector<unsigned long long> calculateFactors(unsigned long long n)
 
 int main()
 {
-  unsigned long long n;
+  uint64_t n;
   cout << "Enter a number: ";
   cin >> n;
-  vector<unsigned long long> factors = calculateFactors(n);
+  vector<uint64_t> factors = calculateFactors(n);
   cout << "Factors: ";
-  for (unsigned long long factor : factors)
+  for (uint64_t factor : factors)
   {
     cout << factor << " ";
   }
