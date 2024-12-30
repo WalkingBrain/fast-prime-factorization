@@ -3,6 +3,10 @@
 #include <chrono>
 
 using namespace std;
+uint64_t q_multiplySix(uint64_t n)
+{
+  return (n << 2) + (n << 1);
+}
 
 vector<uint64_t> calculateFactors(uint64_t n)
 {
@@ -19,7 +23,7 @@ vector<uint64_t> calculateFactors(uint64_t n)
     factors.push_back(3);
     n /= 3;
   }
-  uint64_t sqrtN = uint64_t(sqrtl(n >> 6)) << 3; // 8 * sqrt(n / 64)
+  uint64_t sqrtN = q_multiplySix(uint64_t(sqrtl(n >> 6)) << 3); // 6 * 8 * sqrt(n / 64)
   for (uint64_t factor = 6; factor <= sqrtN; factor += 6) // 6k +/- 1
   {
     if (n == 1) break;
