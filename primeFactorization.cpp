@@ -3,10 +3,6 @@
 #include <chrono>
 
 using namespace std;
-uint64_t q_multiplySix(uint64_t n)
-{
-  return (n << 2) + (n << 1);
-}
 
 vector<uint64_t> calculateFactors(uint64_t n)
 {
