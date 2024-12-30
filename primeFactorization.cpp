@@ -24,20 +24,20 @@ vector<uint64_t> calculateFactors(uint64_t n)
     n /= 3;
   }
   uint64_t sqrtN = uint64_t(sqrtl(n >> 6)) << 3; // 8 * sqrt(n / 64)
-  for (uint64_t i = 1; i <= sqrtN; i++) // 6k +/- 1
+  for (uint64_t factor = 6; factor <= sqrtN; factor += 6) // 6k +/- 1
   {
     if (n == 1) break;
-    uint64_t factor = q_multiplySix(i) - 1; // 6k - 1
-    while (n % factor == 0)
+    uint64_t testFactor = factor - 1;
+    while (n % testFactor == 0)
     {
-      factors.push_back(factor);
-      n /= factor;
+      factors.push_back(testFactor);
+      n /= testFactor;
     }
-    factor += 2; // 6k + 1
-    while (n % factor == 0)
+    testFactor += 2;
+    while (n % testFactor == 0)
     {
-      factors.push_back(factor);
-      n /= factor;
+      factors.push_back(testFactor);
+      n /= testFactor;
     }
   }
 
