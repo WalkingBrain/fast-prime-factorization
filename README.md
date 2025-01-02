@@ -11,7 +11,7 @@ I could've probably searched for optimizations of the compiler such as using a d
 
 Optimizations that I have done:
 * First divide the number by 2 and 3 as many times as possible
-* Instead of checking if n % 2 == 0, check n & 1 == 1, which is a bitwise operation that is quicker (by like a CPU cycle or something)
+* Instead of checking if n % 2 == 0, check n & 1 == 0, which is a bitwise operation that is quicker (by like a CPU cycle or something)
 * Bitshift by 1 to the right instead of dividing by 2
 * Take the square root of the number after the divisions by 2 and 3
 * Take the square root out of the number shifted to the right by 6, then shift the square root by 3 to the left
